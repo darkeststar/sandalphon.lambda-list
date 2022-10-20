@@ -41,15 +41,16 @@
     (cons (do ((n 0 (+ n 2))
 	       (fast list (cddr fast))
 	       (slow list (cdr slow)))
-	      ()
-	    (typecase fast
-	      (null (return n))
-	      ((not cons) (return nil)))
-	    (typecase (cdr fast)
-	      (null (return (1+ n)))
-	      ((not cons) (return nil)))
-	    (when (and (eq fast slow) (> n 0))
-	      (return nil))))
+              ((progn
+                 (typecase fast
+                   (null (return n))
+                   ((not cons) (return nil)))
+                 (typecase (cdr fast)
+                   (null (return (1+ n)))
+                   ((not cons) (return nil)))
+                 (when (and (eq fast slow) (> n 0))
+                   (return nil)))
+               (error "Not a valid dotted list"))))
     (t nil)))
 
 (defun length-check (lambda-list form)

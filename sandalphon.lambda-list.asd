@@ -8,4 +8,5 @@
 	       (:file "parse" :depends-on ("classes" "package"))
 	       (:file "standard-grammars" :depends-on ("package"))
 	       (:file "binds" :depends-on ("classes" "package"))
+               (:file "check" :depends-on ("classes" "package"))
 	       (:file "unparse" :depends-on ("classes" "package"))))
